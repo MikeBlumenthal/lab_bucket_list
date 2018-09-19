@@ -18,6 +18,16 @@ BucketList.prototype.bindEvents = function () {
       PubSub.publish('BucketList:data-loaded', list)
     })
   })
+  PubSub.subscribe('ContainerView:tick-clicked', (event) => {
+    const id = event.detail;
+    // this.request.show(id).then( (object) => {
+      this.request.put(id).then( (list) => {
+        PubSub.publish('BucketList:data-loaded', list)
+      })
+    // })
+  })
 };
+
+
 
 module.exports = BucketList;

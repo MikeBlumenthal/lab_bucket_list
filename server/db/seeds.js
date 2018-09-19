@@ -5,23 +5,23 @@ db.dropDatabase();
 db.items.insertMany([
 
   {
-    item: "take bubble bath",
-    status: true
+    item: "take a bubble bath with John Travolta",
+    status: "false"
   },
 
   {
-    item: "drink petrol",
-    status: false
+    item: "drink a daiquiri in Harry's bar",
+    status: "false"
   },
 
   {
     item: "ride a wave",
-    status: false
+    status: "true"
   },
-  
+
   {
     item: "fight a pig",
-    status: false
+    status: "false"
   }
 
 ]);

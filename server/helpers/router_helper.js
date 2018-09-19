@@ -9,6 +9,14 @@ const createRouter = function (collection) {
     collection.find().toArray().then( (info) => res.json(info) )
   });
 
+  router.get('/:id', (req, res) => {
+      const id = req.params.id;
+      collection
+        .find({ _id: ObjectID(id) })
+        .toArray()
+        .then((info) => res.json(info));
+    });
+
   router.post('/', (req, res) => {
     const newItem = req.body;
     collection.insertOne(newItem)
@@ -18,11 +26,10 @@ const createRouter = function (collection) {
   });
 
   router.put('/:id', (req,res) => {
-    const updatedItem = req.body;
     const id = req.params.id;
     collection.updateOne(
       { _id: ObjectID(id)},
-      { $set: updatedItem}
+      { $set: { status: "true"} }
     )
     .then(() => {
       collection.find().toArray().then( (info) => res.json(info) )

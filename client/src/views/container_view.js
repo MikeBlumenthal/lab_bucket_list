@@ -18,9 +18,25 @@ ContainerView.prototype.render = function (list) {
   list.forEach( (item) => {
     const listItem = document.createElement('li');
     listItem.textContent = `${item.item}`;
-    listItem.classList.add('list-item');
+    if (item.status === "true" ){
+      listItem.classList.add('item-ticked');
+    } else {
+      const tick = this.createTickButton(item._id);
+      listItem.appendChild(tick);
+    }
     bucketList.appendChild(listItem);
   })
+};
+
+ContainerView.prototype.createTickButton = function (itemId) {
+  const tickButton = document.createElement('button')
+  tickButton.classList.add('tick-button');
+  tickButton.textContent = '✓';
+  tickButton.value = itemId;
+  tickButton.addEventListener('click', (event) => {
+    PubSub.publish('ContainerView:tick-clicked', event.target.value)
+  })
+  return tickButton;
 };
 
 module.exports = ContainerView;
