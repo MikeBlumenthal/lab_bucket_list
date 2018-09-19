@@ -12,4 +12,12 @@ BucketList.prototype.getData = function () {
   })
 };
 
+BucketList.prototype.bindEvents = function () {
+  PubSub.subscribe('InputView:item-submitted', (event) => {
+    this.request.post(event.detail).then( (list) => {
+      PubSub.publish('BucketList:data-loaded', list)
+    })
+  })
+};
+
 module.exports = BucketList;
