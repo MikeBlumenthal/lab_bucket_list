@@ -9,6 +9,14 @@ const createRouter = function (collection) {
     collection.find().toArray().then( (info) => res.json(info) )
   });
 
+  router.post('/', (req, res) => {
+    const newItem = req.body;
+    collection.insertOne(newItem)
+    .then(() => {
+      collection.find().toArray().then( (info) => res.json(info) )
+    });
+  });
+
   return router;
 };
 

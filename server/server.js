@@ -3,10 +3,13 @@ const createRouter = require('./helpers/router_helper.js');
 const server = express();
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
+const parser = require('body-parser');
 
 
 const publicPath = path.join(__dirname, '../client/public');
 server.use(express.static(publicPath));
+
+server.use(parser.json());
 
 MongoClient.connect('mongodb://localhost:27017')
 .then((client) => {
