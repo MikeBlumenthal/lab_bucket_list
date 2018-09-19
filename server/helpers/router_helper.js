@@ -17,6 +17,18 @@ const createRouter = function (collection) {
     });
   });
 
+  router.put('/:id', (req,res) => {
+    const updatedItem = req.body;
+    const id = req.params.id;
+    collection.updateOne(
+      { _id: ObjectID(id)},
+      { $set: updatedItem}
+    )
+    .then(() => {
+      collection.find().toArray().then( (info) => res.json(info) )
+    });
+  })
+
   return router;
 };
 
